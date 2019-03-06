@@ -57,7 +57,8 @@ while [[ true ]]; do
   if [[ $HOST_NETWORK == 0 ]]; then
     CONTAINER_IP="localhost"
   else
-    CONTAINER_IP=$(docker inspect --format='{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' $APPNAME)
+    # CONTAINER_IP=$(docker inspect --format='{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' $APPNAME)
+    CONTAINER_IP=$(docker inspect --format '{{ .NetworkSettings.IPAddress }}' $APPNAME)
   fi
 
   if [[ -z $CONTAINER_IP ]]; then
